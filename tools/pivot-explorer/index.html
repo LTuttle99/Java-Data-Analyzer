@@ -9,48 +9,48 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+<body class="bg-slate-50 text-slate-900 min-h-screen font-sans">
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2"></div>
 
-    <header class="border-b border-slate-800 bg-slate-950 px-8 py-4 flex items-center justify-between">
+    <header class="border-b border-slate-200 bg-white px-8 py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <a href="../../index.html" class="text-xs text-slate-500 hover:text-teal-400">&larr; Hub</a>
-            <div class="h-6 w-px bg-slate-800"></div>
-            <h1 class="text-lg font-semibold text-white">Pivot &amp; Chart Explorer</h1>
+            <a href="../../index.html" class="text-xs text-slate-500 hover:text-[#0062F1]">&larr; Hub</a>
+            <div class="h-6 w-px bg-slate-100"></div>
+            <h1 class="text-lg font-semibold text-[#00133C]">Pivot &amp; Chart Explorer</h1>
         </div>
-        <div class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">Ad-hoc data exploration</div>
+        <div class="text-xs text-slate-600 bg-slate-50 px-3 py-1 rounded-full border border-slate-200">Ad-hoc data exploration</div>
     </header>
 
     <main class="max-w-6xl mx-auto p-6 space-y-6">
-        <p class="text-sm text-slate-400 max-w-2xl">
+        <p class="text-sm text-slate-600 max-w-2xl">
             Upload any CSV or Excel file, pick a row field, an optional column field, and a value
             field to aggregate — get an instant pivot table and chart. No fixed schema required.
         </p>
 
-        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
-            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Upload File</label>
-            <input type="file" id="file-input" accept=".csv,.xlsx,.xls" class="block w-full text-sm text-slate-300 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:bg-slate-800 file:text-slate-200 hover:file:bg-slate-700">
+        <div class="bg-white border border-slate-200 rounded-xl p-5">
+            <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">Upload File</label>
+            <input type="file" id="file-input" accept=".csv,.xlsx,.xls" class="block w-full text-sm text-slate-700 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:bg-slate-100 file:text-slate-800 hover:file:bg-slate-200">
             <p id="file-status" class="text-xs text-slate-500 mt-2"></p>
         </div>
 
-        <div id="controls" class="hidden bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-wrap items-end gap-4">
+        <div id="controls" class="hidden bg-white border border-slate-200 rounded-xl p-5 flex flex-wrap items-end gap-4">
             <div>
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Rows</label>
-                <select id="field-rows" class="bg-slate-900 border border-slate-700 rounded-lg text-sm p-2 text-slate-100 min-w-[160px]"></select>
+                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Rows</label>
+                <select id="field-rows" class="bg-slate-50 border border-slate-300 rounded-lg text-sm p-2 text-slate-900 min-w-[160px]"></select>
             </div>
             <div>
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Columns <span class="text-slate-600 normal-case">(optional)</span></label>
-                <select id="field-columns" class="bg-slate-900 border border-slate-700 rounded-lg text-sm p-2 text-slate-100 min-w-[160px]">
+                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Columns <span class="text-slate-600 normal-case">(optional)</span></label>
+                <select id="field-columns" class="bg-slate-50 border border-slate-300 rounded-lg text-sm p-2 text-slate-900 min-w-[160px]">
                     <option value="">-- None --</option>
                 </select>
             </div>
             <div>
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Values</label>
-                <select id="field-values" class="bg-slate-900 border border-slate-700 rounded-lg text-sm p-2 text-slate-100 min-w-[160px]"></select>
+                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Values</label>
+                <select id="field-values" class="bg-slate-50 border border-slate-300 rounded-lg text-sm p-2 text-slate-900 min-w-[160px]"></select>
             </div>
             <div>
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Aggregation</label>
-                <select id="field-agg" class="bg-slate-900 border border-slate-700 rounded-lg text-sm p-2 text-slate-100">
+                <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">Aggregation</label>
+                <select id="field-agg" class="bg-slate-50 border border-slate-300 rounded-lg text-sm p-2 text-slate-900">
                     <option value="sum">Sum</option>
                     <option value="count">Count</option>
                     <option value="avg">Average</option>
@@ -58,23 +58,23 @@
                     <option value="max">Max</option>
                 </select>
             </div>
-            <button onclick="buildPivot()" class="bg-teal-500 hover:bg-teal-400 text-slate-950 text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+            <button onclick="buildPivot()" class="bg-[#0062F1] hover:bg-[#0050C7] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
                 Build Pivot
             </button>
         </div>
 
         <div id="results" class="hidden space-y-6">
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-6">
+            <div class="bg-white border border-slate-200 rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-sm font-medium text-slate-300">Chart</h3>
+                    <h3 class="text-sm font-medium text-slate-700">Chart</h3>
                 </div>
                 <div class="h-80"><canvas id="pivotChart"></canvas></div>
             </div>
 
-            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+            <div class="bg-white border border-slate-200 rounded-xl p-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-sm font-medium text-slate-300">Pivot Table</h3>
-                    <button onclick="exportPivot()" class="text-xs text-teal-400 hover:text-teal-300 font-medium">Export CSV</button>
+                    <h3 class="text-sm font-medium text-slate-700">Pivot Table</h3>
+                    <button onclick="exportPivot()" class="text-xs text-[#0062F1] hover:text-[#00133C] font-medium">Export CSV</button>
                 </div>
                 <div id="pivot-table-container" class="overflow-x-auto"></div>
             </div>
@@ -90,7 +90,7 @@
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = 'text-sm rounded-lg px-4 py-3 shadow-2xl max-w-md bg-red-500/15 border border-red-500/40 text-red-300';
+            toast.className = 'text-sm rounded-lg px-4 py-3 shadow-2xl max-w-md bg-red-50 border border-red-300 text-red-500';
             toast.innerText = message;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 5000);
@@ -190,20 +190,20 @@
 
             container.innerHTML = `
                 <table class="w-full text-left text-xs">
-                    <thead><tr class="border-b border-slate-800 text-slate-400 uppercase">
+                    <thead><tr class="border-b border-slate-200 text-slate-600 uppercase">
                         <th class="py-2 px-3">${escapeHtml(rowsField)}</th>
                         ${headerCols.map(c => `<th class="py-2 px-3 text-right">${escapeHtml(c)}</th>`).join('')}
                         ${colsField ? '<th class="py-2 px-3 text-right font-semibold">Total</th>' : ''}
                     </tr></thead>
-                    <tbody class="divide-y divide-slate-900">
+                    <tbody class="divide-y divide-slate-200">
                         ${table.map(row => `
                             <tr>
-                                <td class="py-2 px-3 text-slate-200 font-medium">${escapeHtml(row.rowKey)}</td>
+                                <td class="py-2 px-3 text-slate-800 font-medium">${escapeHtml(row.rowKey)}</td>
                                 ${colsField
-                                    ? colValues.map(cv => `<td class="py-2 px-3 text-right text-slate-300">${formatNum(row.cell[cv])}</td>`).join('')
-                                    : `<td class="py-2 px-3 text-right text-slate-300">${formatNum(row.total)}</td>`
+                                    ? colValues.map(cv => `<td class="py-2 px-3 text-right text-slate-700">${formatNum(row.cell[cv])}</td>`).join('')
+                                    : `<td class="py-2 px-3 text-right text-slate-700">${formatNum(row.total)}</td>`
                                 }
-                                ${colsField ? `<td class="py-2 px-3 text-right text-teal-400 font-semibold">${formatNum(row.total)}</td>` : ''}
+                                ${colsField ? `<td class="py-2 px-3 text-right text-[#0062F1] font-semibold">${formatNum(row.total)}</td>` : ''}
                             </tr>
                         `).join('')}
                     </tbody>
@@ -225,7 +225,7 @@
             const topRows = table.slice(0, 25);
             const labels = topRows.map(r => r.rowKey);
 
-            const palette = ['#14b8a6', '#3b82f6', '#a855f7', '#f59e0b', '#ef4444', '#10b981', '#eab308', '#ec4899'];
+            const palette = ['#0062F1', '#DC6803', '#00133C', '#a855f7', '#10b981', '#f59e0b', '#ef4444', '#ec4899'];
 
             let datasets;
             if (colsField) {
@@ -235,7 +235,7 @@
                     backgroundColor: palette[i % palette.length]
                 }));
             } else {
-                datasets = [{ label: rowsField, data: topRows.map(r => r.total), backgroundColor: '#14b8a6' }];
+                datasets = [{ label: rowsField, data: topRows.map(r => r.total), backgroundColor: '#0062F1' }];
             }
 
             activeChart = new Chart(canvas.getContext('2d'), {
@@ -245,11 +245,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: { stacked: !!colsField, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } },
-                        y: { stacked: !!colsField, ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }
+                        x: { stacked: !!colsField, ticks: { color: '#475569' }, grid: { color: '#e2e8f0' } },
+                        y: { stacked: !!colsField, ticks: { color: '#475569' }, grid: { color: '#e2e8f0' } }
                     },
                     plugins: {
-                        legend: { display: !!colsField, labels: { color: '#cbd5e1' } }
+                        legend: { display: !!colsField, labels: { color: '#334155' } }
                     }
                 }
             });

@@ -1,12 +1,37 @@
-# Intelligent Data Analyzer — static build
+# Team Analytics Hub
 
-This is a fully static, backend-free version of the Data Analyzer. Every bit of
-analysis that used to run in `app.py`/`analyzer.py` on a FastAPI server now
-runs client-side in the browser (`js/*.js`), so this folder can be hosted
-anywhere that serves plain files — including GitHub Pages, for free, forever.
+A static, backend-free home page for the team's data tools. `index.html` at
+the repo root is the hub landing page; each tool lives in its own folder
+under `tools/`. The hub is built to grow: add a new folder under `tools/`
+and a card on the landing page, and it's a new tool.
+
+## Tools
+
+| Tool | Folder | What it does |
+|---|---|---|
+| Data Analyzer | `tools/data-analyzer/` | KPIs, forecasting, goal pacing, anomaly detection, AI insights on uploaded CSV/Excel data |
+| File Diff | `tools/file-diff/` | Compares two files by a key column — added / removed / changed rows |
+| Pivot & Chart Explorer | `tools/pivot-explorer/` | Ad-hoc pivot table + chart on any file, no fixed schema |
+| Data Cleaner | `tools/data-cleaner/` | Detects and fixes duplicate rows, blanks, messy headers |
+| Format Converter | `tools/converter/` | Converts between CSV, Excel, and JSON |
+| JSON Formatter | `tools/json-formatter/` | Validates, pretty-prints, and minifies JSON |
+| Timestamp Converter | `tools/timestamp-converter/` | Unix/date conversion across timezones, ISO 8601, relative time |
+
+`tools/shared/parse.js` holds the CSV/Excel parsing and CSV/Excel/JSON
+download helpers reused by File Diff, Pivot Explorer, Data Cleaner, and
+Format Converter. Data Analyzer keeps its own copy in
+`tools/data-analyzer/js/core.js` so it stays fully self-contained. JSON
+Formatter and Timestamp Converter need no file parsing at all.
+
+## Data Analyzer (`tools/data-analyzer/`)
+
+A fully static, backend-free version of the original FastAPI Data Analyzer.
+Every bit of analysis that used to run in `app.py`/`analyzer.py` on a server
+now runs client-side in the browser (`tools/data-analyzer/js/*.js`).
 
 Nothing is uploaded anywhere. Files you pick are parsed and analyzed entirely
-in your own browser tab; there's no server to send data to.
+in your own browser tab; there's no server to send data to — which is also
+what keeps this safe to share as a team hub with no login and no backend.
 
 ## Preview it locally before publishing
 
@@ -14,9 +39,11 @@ in your own browser tab; there's no server to send data to.
 ./serve.sh
 ```
 
-Then open http://localhost:8020. (Just double-clicking `index.html` also
-mostly works, but some browsers restrict local script loading over the
-`file://` protocol — `serve.sh` avoids that entirely.)
+Then open http://localhost:8020 for the hub, or
+http://localhost:8020/tools/data-analyzer/ to go straight to the analyzer.
+(Just double-clicking `index.html` also mostly works, but some browsers
+restrict local script loading over the `file://` protocol — `serve.sh`
+avoids that entirely.)
 
 ## Publish to GitHub Pages
 
@@ -42,7 +69,22 @@ mostly works, but some browsers restrict local script loading over the
 Edit the files, commit, and push — GitHub Pages redeploys automatically on
 every push to `main`. No server to restart, nothing to redeploy manually.
 
-## What changed vs. the FastAPI version
+## Renaming the hub
+
+The landing page title, header text, and tagline are plain text/HTML at the
+top of the root `index.html` — edit `Team Analytics Hub` and the intro
+paragraph to your team's actual name. No build step, just save and push.
+
+## Adding another tool
+
+1. Create `tools/<your-tool-name>/` and put its static files there
+   (self-contained, same pattern as `tools/data-analyzer/`).
+2. Copy one of the `<a href="tools/data-analyzer/index.html">...</a>` card
+   blocks in the root `index.html`, point the `href` at your new tool, and
+   update its icon/title/description.
+3. Commit and push.
+
+## What changed vs. the FastAPI version (Data Analyzer)
 
 - `analyzer.py` → `js/core.js`, `js/schema.js`, `js/forecast.js`,
   `js/goals.js`, `js/insights.js`, `js/run-analysis.js` (the analysis engine,

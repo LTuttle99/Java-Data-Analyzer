@@ -7,38 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+<body class="bg-slate-50 text-slate-900 min-h-screen font-sans">
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2"></div>
 
-    <header class="border-b border-slate-800 bg-slate-950 px-8 py-4 flex items-center justify-between">
+    <header class="border-b border-slate-200 bg-white px-8 py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <a href="../../index.html" class="text-xs text-slate-500 hover:text-teal-400">&larr; Hub</a>
-            <div class="h-6 w-px bg-slate-800"></div>
-            <h1 class="text-lg font-semibold text-white">JSON Formatter</h1>
+            <a href="../../index.html" class="text-xs text-slate-500 hover:text-[#0062F1]">&larr; Hub</a>
+            <div class="h-6 w-px bg-slate-100"></div>
+            <h1 class="text-lg font-semibold text-[#00133C]">JSON Formatter</h1>
         </div>
-        <div class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">Validate &middot; Pretty-print &middot; Minify</div>
+        <div class="text-xs text-slate-600 bg-slate-50 px-3 py-1 rounded-full border border-slate-200">Validate &middot; Pretty-print &middot; Minify</div>
     </header>
 
     <main class="max-w-5xl mx-auto p-6 space-y-4">
         <div class="flex flex-wrap items-center gap-3">
-            <button onclick="formatJson(2)" class="bg-teal-500 hover:bg-teal-400 text-slate-950 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Pretty-print</button>
-            <button onclick="minifyJson()" class="bg-slate-800 hover:bg-slate-700 text-slate-100 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Minify</button>
-            <button onclick="copyJson()" class="bg-slate-800 hover:bg-slate-700 text-slate-100 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Copy</button>
-            <button onclick="downloadJson()" class="bg-slate-800 hover:bg-slate-700 text-slate-100 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Download .json</button>
-            <label class="bg-slate-800 hover:bg-slate-700 text-slate-100 text-sm font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer">
+            <button onclick="formatJson(2)" class="bg-[#0062F1] hover:bg-[#0050C7] text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Pretty-print</button>
+            <button onclick="minifyJson()" class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Minify</button>
+            <button onclick="copyJson()" class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Copy</button>
+            <button onclick="downloadJson()" class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Download .json</button>
+            <label class="bg-slate-100 hover:bg-slate-200 text-slate-900 text-sm font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer">
                 Upload .json
                 <input type="file" id="file-input" accept=".json" class="hidden">
             </label>
             <div class="flex-1"></div>
-            <span id="status-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 text-slate-400">No input yet</span>
+            <span id="status-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600">No input yet</span>
         </div>
 
         <textarea id="json-input" spellcheck="false"
-            class="w-full h-[28rem] bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm font-mono text-slate-200 focus:border-teal-500 focus:outline-none resize-y"
+            class="w-full h-[28rem] bg-white border border-slate-200 rounded-xl p-4 text-sm font-mono text-slate-800 focus:border-[#0062F1] focus:outline-none resize-y"
             placeholder='Paste JSON here, e.g. {"hello": "world"}'></textarea>
 
-        <div id="error-panel" class="hidden bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-sm text-red-300"></div>
-        <div id="info-panel" class="hidden bg-slate-950 border border-slate-800 rounded-lg p-4 text-sm text-slate-400"></div>
+        <div id="error-panel" class="hidden bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-500"></div>
+        <div id="info-panel" class="hidden bg-white border border-slate-200 rounded-lg p-4 text-sm text-slate-600"></div>
     </main>
 
     <script src="../shared/parse.js"></script>
@@ -51,7 +51,7 @@
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = 'text-sm rounded-lg px-4 py-3 shadow-2xl max-w-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300';
+            toast.className = 'text-sm rounded-lg px-4 py-3 shadow-2xl max-w-md bg-emerald-50 border border-emerald-300 text-emerald-500';
             toast.innerText = message;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
@@ -73,7 +73,7 @@
             const text = input.value;
 
             if (text.trim() === '') {
-                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 text-slate-400';
+                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 text-slate-600';
                 statusBadge.innerText = 'No input yet';
                 errorPanel.classList.add('hidden');
                 infoPanel.classList.add('hidden');
@@ -82,7 +82,7 @@
 
             try {
                 const parsed = JSON.parse(text);
-                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400';
+                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-600';
                 statusBadge.innerText = 'Valid JSON';
                 errorPanel.classList.add('hidden');
 
@@ -93,7 +93,7 @@
 
                 return parsed;
             } catch (err) {
-                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-red-500/20 text-red-400';
+                statusBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full bg-red-50 text-red-600';
                 statusBadge.innerText = 'Invalid JSON';
                 infoPanel.classList.add('hidden');
                 errorPanel.classList.remove('hidden');
