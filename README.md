@@ -43,6 +43,14 @@ Previewer is the only text-based tool with an external dependency (`marked`).
   and "Text & Dev Utilities" (paste/type tools).
 - **Favicon** — every page (hub + all tools) shares the same navy/blue "H"
   favicon so browser tabs are recognizable.
+- **"What's New in Data"** — a static card near the top linking out to
+  [TLDR Data](https://tldr.tech/data). It's a plain link, not a live feed:
+  newsletter platforms don't allow fetching their RSS/Atom feeds from browser
+  JavaScript (no CORS support), and routing around that with a third-party
+  proxy would mean this hub — which otherwise makes zero external network
+  calls — pings a proxy server on every page load. Update the headline/blurb
+  and `href` directly in the root `index.html` whenever you want to change
+  what it points to.
 
 ## Data Analyzer (`tools/data-analyzer/`)
 

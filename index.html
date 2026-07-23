@@ -45,6 +45,32 @@
             </p>
         </section>
 
+        <!--
+            "What's New in Data" — edit the headline/blurb below whenever there's something
+            worth calling out, and update the href if you switch to a different newsletter.
+            This is a plain static link (not a live feed): newsletter platforms don't allow
+            fetching their RSS/Atom feeds from browser JavaScript (no CORS support), and
+            routing around that with a third-party proxy would mean this hub — which
+            otherwise makes zero external calls — pings a proxy server on every page load.
+            A hand-updated card keeps that "nothing leaves your browser" property intact.
+        -->
+        <a href="https://tldr.tech/data" target="_blank" rel="noopener noreferrer"
+           class="group block max-w-2xl bg-white border border-slate-200 hover:border-[#DC6803] rounded-xl p-5 shadow-sm hover:shadow-md transition-all">
+            <div class="flex items-center gap-4">
+                <div class="h-10 w-10 shrink-0 rounded-lg bg-[#DC6803]/10 text-[#DC6803] flex items-center justify-center text-lg" aria-hidden="true">&#128240;</div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-[#DC6803] mb-0.5">What's New in Data</p>
+                    <p class="text-sm text-slate-700">
+                        <span class="font-semibold text-[#00133C]">TLDR Data</span> — a free 5-minute daily
+                        read on data science, analytics, and engineering trends.
+                    </p>
+                </div>
+                <span class="shrink-0 text-xs font-semibold text-[#0062F1] group-hover:text-[#00133C] inline-flex items-center gap-1">
+                    Read the newsletter <span aria-hidden="true">&rarr;</span>
+                </span>
+            </div>
+        </a>
+
         <section>
             <label for="tool-search" class="sr-only">Search tools</label>
             <div class="relative max-w-md">
