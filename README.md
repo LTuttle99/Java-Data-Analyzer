@@ -22,14 +22,27 @@ and a card on the landing page, and it's a new tool.
 | Color Tools | `tools/color-tools/` | Shade palette generator from a base color, plus a WCAG contrast ratio checker |
 | Text Analyzer | `tools/text-analyzer/` | Word/character/sentence counts, reading time, most frequent words |
 | QR Code Generator | `tools/qr-generator/` | Text/URL to a downloadable QR code PNG (via the `qrcode-generator` CDN library) |
+| Markdown Previewer | `tools/markdown-preview/` | Live-rendered Markdown with copy/download HTML (via the `marked` CDN library) |
+| Base64 / URL Encoder | `tools/encode-decode/` | UTF-8 safe Base64 and URL encode/decode, chainable |
+| Unit Converter | `tools/unit-converter/` | Length, weight, and temperature conversion with a quick reference table |
 
 `tools/shared/parse.js` holds the CSV/Excel parsing and CSV/Excel/JSON
 download helpers reused by every file-based tool (File Diff, Pivot Explorer,
 Data Cleaner, Format Converter, Column Statistics). Data Analyzer keeps its
 own copy in `tools/data-analyzer/js/core.js` so it stays fully
 self-contained. The purely text/paste-based tools (JSON Formatter,
-Timestamp Converter, Regex Tester, Text Diff, Color Tools, Text Analyzer)
-need no file parsing at all and have zero shared dependencies.
+Timestamp Converter, Regex Tester, Text Diff, Color Tools, Text Analyzer,
+Base64/URL Encoder, Unit Converter) need no file parsing at all. Markdown
+Previewer is the only text-based tool with an external dependency (`marked`).
+
+## Hub features
+
+- **Search** — the search box on the landing page filters cards by name and
+  description as you type; empty categories hide themselves automatically.
+- **Categories** — tools are grouped into "Data & Files" (upload-a-file tools)
+  and "Text & Dev Utilities" (paste/type tools).
+- **Favicon** — every page (hub + all tools) shares the same navy/blue "H"
+  favicon so browser tabs are recognizable.
 
 ## Data Analyzer (`tools/data-analyzer/`)
 
